@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AbcSkool.Core.Services
 {
-    public class StudentService : GenericService<Student>, IStudentService
+    public class StudentService : GenericAsyncService<Student>, IStudentService
     {
         public StudentService(IStudentRepository studentRepo) : base(studentRepo)
         {

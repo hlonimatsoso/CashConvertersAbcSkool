@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace AbcSkool.Data.Repositories
 {
+
+    /// <summary>
+    /// Overkill
+    /// </summary>
     public class AbcRepository : IAbcRepository
     {
         public IStudentRepository StudentRepository { get ; set ; }

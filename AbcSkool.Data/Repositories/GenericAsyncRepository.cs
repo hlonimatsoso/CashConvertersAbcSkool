@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace AbcSkool.Data.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericAsyncRepository<T> : IGenericRepository<T> where T : class
     {
         private AbcSkoolDbContext _context = null;
         private DbSet<T> table = null;
 
 
-        public GenericRepository(AbcSkoolDbContext context)
+        public GenericAsyncRepository(AbcSkoolDbContext context)
         {
             this._context = context;
             table = _context.Set<T>();

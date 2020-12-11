@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace AbcSkool.Core.Services
 {
-    public class GenericService<T> : IGenericService<T> where T : class
+    public class GenericAsyncService<T> : IGenericService<T> where T : class
     {
         IGenericRepository<T> _repo;
 
-        public GenericService(IGenericRepository<T> repo)
+        public GenericAsyncService(IGenericRepository<T> repo)
         {
             this._repo = repo;
         }

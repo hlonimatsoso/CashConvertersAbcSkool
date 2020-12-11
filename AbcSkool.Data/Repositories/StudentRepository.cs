@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AbcSkool.Data.Repositories
 {
-    public class StudentRepository : GenericRepository<Student>, IStudentRepository
+    public class StudentRepository : GenericAsyncRepository<Student>, IStudentRepository
     {
         public StudentRepository(AbcSkoolDbContext context) : base(context)
         { }

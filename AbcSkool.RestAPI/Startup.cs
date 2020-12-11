@@ -47,6 +47,8 @@ namespace AbcSkool.RestAPI
 
             services.AddScoped<IStudentService, StudentService>();
 
+            //services.AddScoped<IAbcRepository, AbcRepository>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AbcSkool.RestAPI", Version = "v1" });
