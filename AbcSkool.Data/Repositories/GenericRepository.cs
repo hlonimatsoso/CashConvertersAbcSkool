@@ -20,31 +20,86 @@ namespace AbcSkool.Data.Repositories
             table = _context.Set<T>();
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return table.ToList();
+            try
+            {
+                return await table.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"DB Error => Failed to get all {typeof(T).Name}s.", ex);
+            }
         }
-        public T GetById(object id)
+        public async Task<T> GetByIdAsync(object id)
         {
-            return table.Find(id);
+            try
+            {
+                return await table.FindAsync(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"DB Error => Failed to get a {typeof(T).Name} with the ID of {id}.", ex);
+            }
         }
-        public void Insert(T obj)
+        public async Task AddAsync(T obj)
         {
-            table.Add(obj);
+            try
+            {
+                await table.AddAsync(obj);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"DB Error => Failed to add a {typeof(T).Name}. Details: {obj.ToString()}.", ex);
+            }
         }
-        public void Update(T obj)
+        public async Task UpdateAsync(T obj)
         {
-            table.Attach(obj);
-            _context.Entry(obj).State = EntityState.Modified;
+            try
+            {
+                await Task.Run(() =>
+                {
+                    table.Attach(obj);
+                    _context.Entry(obj).State = EntityState.Modified;
+                });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"DB Error => Failed to update {typeof(T).Name}. Details: {obj.ToString()}.", ex);
+            }
+
         }
-        public void Delete(object id)
+        public async Task DeleteAsync(object id)
         {
-            T existing = table.Find(id);
-            table.Remove(existing);
+            try
+            {
+                await Task.Run(async () =>
+                {
+                    T existing = await table.FindAsync(id);
+
+                    if (existing == null)
+                        throw new Exception($"No {typeof(T)} with an ID of {id} was found in the datbase.");
+
+                    table.Remove(existing);
+
+                });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"DB Error => Failed to delete a {typeof(T).Name} with the ID {id}.", ex);
+            }
+
         }
-        public void Save()
+        public async Task SaveAsync()
         {
-            _context.SaveChanges();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"DB Error => Failed to save any changes to any table.", ex);
+            }
         }
     }
 }

@@ -16,34 +16,34 @@ namespace AbcSkool.Core.Services
             this._repo = repo;
         }
 
-        public void Delete(object id)
+        public async Task DeleteAsync(object id)
         {
-            this._repo.Delete(id);
+            await this._repo.DeleteAsync(id);
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return this._repo.GetAll();
+            return await this._repo.GetAllAsync();
         }
 
-        public T GetById(object id)
+        public async Task<T> GetByIdAsync(object id)
         {
-            return this._repo.GetById(id);
+            return await this._repo.GetByIdAsync(id);
         }
 
-        public void Insert(T obj)
+        public async Task AddAsync(T obj)
         {
-            this._repo.Insert(obj);
+           await this._repo.AddAsync(obj);
         }
 
-        public void Save()
+        public async Task SaveAsync()
         {
-            this._repo.Save();
+           await this._repo.SaveAsync();
         }
 
-        public void Update(T obj)
+        public async Task UpdateAsync(T obj)
         {
-            this._repo.Update(obj);
+           await this._repo.UpdateAsync(obj);
         }
     }
 }

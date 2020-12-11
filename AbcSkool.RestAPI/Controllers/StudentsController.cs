@@ -19,62 +19,136 @@ namespace AbcSkool.RestAPI.Controllers
         IStudentService _service;
         IMapper _mapper;
 
+
+
         public StudentsController(IStudentService service, IMapper mapper)
         {
             this._service = service;
             this._mapper = mapper;
         }
 
+
+
+
         [HttpGet("")]
-        public List<Student> GetAllStudents()
+        public async Task<ActionResult> GetAllStudentsAsync()
         {
-            List<Student> result;
+            try
+            {
+                List<Student> result;
 
-            result = this._service.GetAll() as List<Student>;
+                result = await this._service.GetAllAsync() as List<Student>;
 
-            return result;
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return Problem(detail: $"Error getting all students. {ex.Message} InnerException: {ex.InnerException?.Message}");
+            }
         }
+
+
+
 
 
         [HttpGet("{Id:int}")]
-        public Student GetSingleStudent(int Id)
+        public async Task<ActionResult> GetSingleStudentAsync(int Id)
         {
-            Student result;
+            try
+            {
+                Student result;
 
-            result = this._service.GetById(Id) as Student;
+                result = await this._service.GetByIdAsync(Id) as Student;
 
-            return result;
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return Problem(detail:$"Failed to get student id {Id}. Error: {ex.Message}. InnerException: {ex.InnerException?.Message}");
+            }
         }
+
+
+
 
 
         [HttpPost("")]
-        public void AddStudent(AddStudentDTO student)
+        public async Task<ActionResult> AddStudentAsync(AddStudentDTO student)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var s = _mapper.Map<Student>(student);
 
-            this._service.Insert(s);
+            try
+            {
+                await this._service.AddAsync(s);
 
-            this._service.Save();
+                await this._service.SaveAsync();
+            }
+            catch (Exception ex)
+            {
+                return Problem(detail: $"Failed to add student ({s.Name}). Error: {ex.Message}. InnerException: {ex.InnerException?.Message}");
+            }
+
+            return Ok();
         }
+
+
+
+
 
         [HttpPut("")]
-        public void UpdateStudent(UpdateStudentDTO student)
+        public async Task<ActionResult> UpdateStudentAsync(UpdateStudentDTO student)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var s = _mapper.Map<Student>(student);
 
-            this._service.Update(s);
+            try
+            {
+                await this._service.UpdateAsync(s);
 
-            this._service.Save();
+                await this._service.SaveAsync();
+            }
+            catch (Exception ex)
+            {
+                return Problem(detail: $"Failed to update student ({s.Name}). Error: {ex.Message}. InnerException: {ex.InnerException?.Message}");
+            }
+
+            return Ok();
         }
+
+
+
+
+
+
 
         [HttpDelete("{Id:int}")]
-        public void DeleteStudent(int Id)
+        public async Task<ActionResult> DeleteStudentAsync(int Id)
         {
-            this._service.Delete(Id);
+            
+            try
+            {
+                await this._service.DeleteAsync(Id);
 
-            this._service.Save();
+                await this._service.SaveAsync();
+            }
+            catch (Exception ex)
+            {
+                return Problem(detail: $"Failed to delete student with ID '{Id}'. Error: {ex.Message}. InnerException: {ex.InnerException?.Message}.");
+            }
+
+            return Ok();
         }
+
+
+
     }
+
+
 
 
 }

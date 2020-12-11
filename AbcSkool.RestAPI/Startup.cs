@@ -4,6 +4,7 @@ using AbcSkool.Data;
 using AbcSkool.Data.Repositories;
 using AbcSkool.Interfaces;
 using AutoMapper;
+using AutoWrapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -63,6 +64,8 @@ namespace AbcSkool.RestAPI
             }
 
             app.UseHttpsRedirection();
+
+            //app.UseApiResponseAndExceptionWrapper(new AutoWrapperOptions { ShowStatusCode = true});
 
             app.UseRouting();
 

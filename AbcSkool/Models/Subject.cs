@@ -14,6 +14,15 @@ namespace AbcSkool.Models
 
         List<StudentSubjects> Students { get; set; }
 
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
 
+            sb.Append($"Subject ID: {SubjectId},");
+            sb.Append($"Subject Name: {SubjectName},");
+            sb.Append($"Description: '{Description}'");
+
+            return sb.ToString();
+        }
     }
 }
