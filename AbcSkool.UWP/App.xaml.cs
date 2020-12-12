@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AbcSkool.UWP.Clients;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace AbcSkool.UWP
     /// </summary>
     sealed partial class App : Application
     {
+        public SkoolClient SkoolClient { get; set; }
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -71,6 +73,15 @@ namespace AbcSkool.UWP
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
+
+            Load();
+
+        }
+
+        private void Load()
+        {
+            SkoolClient = new SkoolClient();
+            var students = SkoolClient.GetAllStudents().GetAwaiter().GetResult();
         }
 
         /// <summary>
