@@ -68,7 +68,7 @@ namespace AbcSkool.UWP
 
         private void StudentLink_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(typeof(StudentsView));
+            MainFrame.Navigate(typeof(StudentsView), MainPageViewModel);
             HambergerSplit.IsPaneOpen = false;
         }
     }

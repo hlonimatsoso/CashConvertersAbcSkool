@@ -7,7 +7,13 @@ namespace AbcSkool
     public static class Config
     {
         public static string ApiBaseUrl = "http://localhost:5000/api/";
-        public static string Api_AllStdents_Uri = "students";
-        public static string Api_AllSubjects_Url = "subjects";
+        
+        public static string REST_Endpoints_Students = "students";
+        public static string REST_Endpoints_Subjects = "subjects";
+
+        public static int StudentNumber_MinValue = 10000;
+        public static int StudentNumber_MaxValue = 99999;
+
+
     }
 }

@@ -22,6 +22,11 @@ namespace AbcSkool.UWP
             Subjects = await Client.GetAllSubjects();
         }
 
+        public static void RefreshStudents()
+        {
+            Students = Client.GetAllStudents().Result;
+        }
+
         public static async Task RefreshStudentsAsync()
         {
             Students = await Client.GetAllStudents();

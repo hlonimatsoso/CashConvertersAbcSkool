@@ -5,11 +5,37 @@
     xmlns:local="using:AbcSkool.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:AbcSkool.Models"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock>STUDENTS</TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+
+        </Grid.RowDefinitions>
+        <TextBlock HorizontalAlignment="Center">STUDENTS</TextBlock>
+        <GridView Grid.Row="1" ItemsSource="{Binding Path=Students}" HorizontalAlignment="Center" Margin="20" >
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="models:Student">
+                    <StackPanel Orientation="Horizontal" Margin="15">
+                        <!--<TextBlock Text="{Binding StudentId}" Margin="10"/>-->
+                        <TextBlock Text="{Binding Name}" Margin="10"/>
+                        <TextBlock Text="{Binding Surname}" Margin="10"/>
+                        <TextBlock Text="{Binding StudentNumber}" Margin="10"/>
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+        <Canvas Grid.Row="2">
+            <TextBlock Text="Name" />
+            <TextBox x:Name="Name" Canvas.Left="91"></TextBox>
+            <TextBlock Text="Surname" Canvas.Top="40" />
+            <TextBox  x:Name="Surname" Canvas.Left="91" Canvas.Top="40"/>
+            <Button x:Name="AddSTudent" Click="AddSTudent_Click" Canvas.Top="94" Canvas.Left="91">Add Student</Button>
+        </Canvas>
 
     </Grid>
 </Page>

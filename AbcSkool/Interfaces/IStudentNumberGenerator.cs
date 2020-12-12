@@ -5,11 +5,8 @@ using System.Threading.Tasks;
 
 namespace AbcSkool.Interfaces
 {
-    public interface IRestClient 
+    public interface IStudentNumberGenerator
     {
-        Task<T> Get<T>(string url);
-
-        Task Post<T>(string url, T data);
-
+        int Next(int min, int max);
     }
 }

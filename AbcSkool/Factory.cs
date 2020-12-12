@@ -1,4 +1,5 @@
 ﻿using AbcSkool.Interfaces;
+using AbcSkool.Tools;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -17,6 +18,18 @@ namespace AbcSkool
                     _httpClient = new HttpClient() { BaseAddress = new Uri(Config.ApiBaseUrl) };
 
                 return _httpClient;
+            }
+        }
+
+        private static RandomStudentNumberGenerator _randomStudentNumberGenerator;
+
+        public static RandomStudentNumberGenerator RandomStudentNumberGenerator
+        {
+            get
+            {
+                if (_randomStudentNumberGenerator == null)
+                    _randomStudentNumberGenerator = new RandomStudentNumberGenerator();
+                return _randomStudentNumberGenerator;
             }
         }
 
