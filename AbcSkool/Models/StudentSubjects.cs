@@ -16,7 +16,7 @@ namespace AbcSkool.Models
         public int SubjectId { get; set; }
 
         [ForeignKey("SubjectId")]
-        public Student Subject { get; set; }
+        public Subject Subject { get; set; }
 
 
     }

@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid MaxWidth="800">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -21,7 +21,7 @@
                 <StackPanel>
                     <GridView Grid.Row="1" ItemsSource="{Binding Path=Subjects}" HorizontalAlignment="Center" Margin="20" >
                         <GridView.ItemTemplate>
-                            <DataTemplate x:DataType="models:Student">
+                            <DataTemplate x:DataType="models:Subject">
                                 <StackPanel Orientation="Horizontal" Margin="15">
                                     <TextBlock Text="{Binding SubjectId}" Margin="10"/>
                                     <TextBlock Text="{Binding SubjectName}" Margin="10"/>

@@ -26,6 +26,8 @@ namespace AbcSkool.UWP
     {
         MainPageViewModel MainPageViewModel;
         StudentsViewModel StudentsViewModel;
+        SubjectsViewModel SubjectsViewModel;
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -38,15 +40,20 @@ namespace AbcSkool.UWP
         {
 
             this.DataContext = this.MainPageViewModel;
-            MainFrame.Navigate(typeof(HomeView));
+            MainFrame.Navigate(typeof(HomeView), MainPageViewModel);
         }
 
         private void MainPage_Loading(FrameworkElement sender, object args)
         {
             this.MainPageViewModel = new MainPageViewModel { };
             this.StudentsViewModel = new StudentsViewModel { };
+            this.SubjectsViewModel = new SubjectsViewModel { };
+
             this.MainPageViewModel.Students = AppData.Students;
+            this.MainPageViewModel.Subjects = AppData.Subjects;
+
             this.StudentsViewModel.Students = AppData.Students;
+            this.SubjectsViewModel.Subjects = AppData.Subjects;
         }
 
         private void Hamburger_Click(object sender, RoutedEventArgs e)
@@ -64,7 +71,7 @@ namespace AbcSkool.UWP
 
         private void SubjectLink_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(typeof(SubjectsView));
+            MainFrame.Navigate(typeof(SubjectsView), SubjectsViewModel);
             HambergerSplit.IsPaneOpen = false;
         }
 

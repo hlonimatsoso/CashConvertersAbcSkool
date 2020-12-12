@@ -40,9 +40,6 @@ namespace AbcSkool.UWP.ViewModels
             get { return _name; }
             set
             {
-                //if (string.IsNullOrWhiteSpace(value))
-                //    return;
-
                 _name = value;
                 PropertyHasChanged("Name");
                 CheckCanSubmit();
@@ -72,9 +69,6 @@ namespace AbcSkool.UWP.ViewModels
             get { return _surname; }
             set
             {
-                //if (string.IsNullOrWhiteSpace(value))
-                //    return;
-
                 _surname = value;
                 PropertyHasChanged("Surname");
                 CheckCanSubmit();

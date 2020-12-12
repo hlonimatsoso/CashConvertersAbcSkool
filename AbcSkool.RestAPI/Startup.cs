@@ -43,9 +43,16 @@ namespace AbcSkool.RestAPI
             services.AddDbContext<AbcSkoolDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+
             services.AddScoped<IStudentRepository, StudentRepository>();
 
+            services.AddScoped<ISubjectRepository, SubjectRepository>();
+
+
             services.AddScoped<IStudentService, StudentService>();
+
+            services.AddScoped<ISubjectService, SubjectService>();
+
 
             //services.AddScoped<IAbcRepository, AbcRepository>();
 

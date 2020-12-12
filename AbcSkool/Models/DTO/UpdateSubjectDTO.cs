@@ -6,8 +6,13 @@ using System.Text;
 namespace AbcSkool.Models.DTO
 {
 
-    public class AddSubjectDTO
+    public class UpdateSubjectDTO
     {
+
+        [Required]
+        public int SubjectId { get; set; }
+
+
         [Required]
         public string SubjectName { get; set; }
 

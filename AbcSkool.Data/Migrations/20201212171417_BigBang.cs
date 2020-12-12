@@ -2,7 +2,7 @@
 
 namespace AbcSkool.Data.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class BigBang : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

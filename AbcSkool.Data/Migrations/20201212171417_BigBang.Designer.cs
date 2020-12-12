@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AbcSkool.Data.Migrations
 {
     [DbContext(typeof(AbcSkoolDbContext))]
-    [Migration("20201211133110_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20201212171417_BigBang")]
+    partial class BigBang
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

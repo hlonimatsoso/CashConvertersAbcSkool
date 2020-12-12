@@ -5,7 +5,6 @@ using System.Text;
 
 namespace AbcSkool.Models
 {
-    [Table("Students")]
     public class Student
     {
         public int StudentId { get; set; }

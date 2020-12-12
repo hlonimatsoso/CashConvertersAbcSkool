@@ -13,7 +13,7 @@ namespace AbcSkool.Data
 
         public DbSet<Student> Students { get; set; }
 
-        public DbSet<Student> Subjects { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
 
         public DbSet<StudentSubjects> StudentSubjects { get; set; }
 

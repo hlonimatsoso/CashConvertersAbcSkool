@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AbcSkool.UWP.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,19 @@ namespace AbcSkool.UWP.Views
     /// </summary>
     public sealed partial class HomeView : Page
     {
+
+        MainPageViewModel VM;
+
         public HomeView()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            VM = e.Parameter as MainPageViewModel;
+            this.DataContext = VM;
+            base.OnNavigatedTo(e);
         }
     }
 }

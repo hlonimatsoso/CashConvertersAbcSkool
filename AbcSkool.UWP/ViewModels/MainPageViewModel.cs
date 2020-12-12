@@ -16,7 +16,21 @@ namespace AbcSkool.UWP.ViewModels
             this.Students = new List<Student>();
         }
 
-        public List<Subject> Subjects { get; set; }
+        private List<Subject> _subjects;
+
+        public List<Subject> Subjects
+        {
+            get
+            {
+                return _subjects;
+            }
+            set
+            {
+                if (value != null)
+                    _subjects = value;
+                OnPropertyChanged("Subjects");
+            }
+        }
 
         private List<Student> _students;
         public List<Student> Students

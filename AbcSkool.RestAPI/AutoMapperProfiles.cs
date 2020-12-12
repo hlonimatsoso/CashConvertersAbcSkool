@@ -19,6 +19,14 @@ namespace AbcSkool.RestAPI
             CreateMap<Student, UpdateStudentDTO>().ReverseMap();
 
 
+
+            CreateMap<Object, Subject>();
+
+            CreateMap<Subject, AddSubjectDTO>().ReverseMap();
+
+            CreateMap<Subject, UpdateSubjectDTO>().ReverseMap();
+
+
         }
     }
 }
