@@ -27,7 +27,7 @@ namespace AbcSkool.UWP.Views
     /// </summary>
     public sealed partial class StudentsView : Page
     {
-        MainPageViewModel VM;
+        StudentsViewModel VM;
 
         public StudentsView()
         {
@@ -47,8 +47,11 @@ namespace AbcSkool.UWP.Views
             try
             {
                 await AppData.Client.Post(Config.REST_Endpoints_Students, student);
-                AppData.RefreshStudents();
+                await AppData.RefreshStudentsAsync();
                 this.VM.Students = AppData.Students;
+                this.VM.Name = string.Empty;
+                this.VM.Surname = string.Empty;
+
             }
             catch (Exception ex)
             {
@@ -65,12 +68,12 @@ namespace AbcSkool.UWP.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
 
-            this.VM = e.Parameter as MainPageViewModel;
+            this.VM = e.Parameter as StudentsViewModel;
             this.DataContext = VM;
 
             base.OnNavigatedTo(e);
         }
 
-
+ 
     }
 }

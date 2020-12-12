@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 
 namespace AbcSkool.UWP.Clients
 {
@@ -36,8 +37,13 @@ namespace AbcSkool.UWP.Clients
             }
             catch (Exception ex)
             {
+                string title = $"OH SNAP! API Error!";
 
-                throw;
+                string msg = $"Askies, the system is offline. \n Exception : {ex.Message}. \n Inner Exception : {ex.InnerException?.Message}.";
+                var dialog = new MessageDialog(msg, title);
+                dialog.ShowAsync();
+                // Log error
+                
             }
 
             return result;

@@ -25,7 +25,7 @@ namespace AbcSkool.UWP
     public sealed partial class MainPage : Page
     {
         MainPageViewModel MainPageViewModel;
-
+        StudentsViewModel StudentsViewModel;
         public MainPage()
         {
             this.InitializeComponent();
@@ -44,7 +44,9 @@ namespace AbcSkool.UWP
         private void MainPage_Loading(FrameworkElement sender, object args)
         {
             this.MainPageViewModel = new MainPageViewModel { };
+            this.StudentsViewModel = new StudentsViewModel { };
             this.MainPageViewModel.Students = AppData.Students;
+            this.StudentsViewModel.Students = AppData.Students;
         }
 
         private void Hamburger_Click(object sender, RoutedEventArgs e)
@@ -68,7 +70,7 @@ namespace AbcSkool.UWP
 
         private void StudentLink_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(typeof(StudentsView), MainPageViewModel);
+            MainFrame.Navigate(typeof(StudentsView), StudentsViewModel);
             HambergerSplit.IsPaneOpen = false;
         }
     }

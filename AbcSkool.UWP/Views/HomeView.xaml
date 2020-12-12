@@ -5,6 +5,7 @@
     xmlns:local="using:AbcSkool.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:AbcSkool.Models"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -14,44 +15,40 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Center" Margin="0,0,0,20">Home</TextBlock>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
-            <StackPanel Margin="0,0,200,0">
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" >
+            <StackPanel Margin="5">
                 <TextBlock>Subjects</TextBlock>
                 <StackPanel>
-
-                    <ListBox ItemsSource="{Binding Path=Subjects}">
-
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding SubjectName}" Margin="10" />
+                    <GridView Grid.Row="1" ItemsSource="{Binding Path=Subjects}" HorizontalAlignment="Center" Margin="20" >
+                        <GridView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Student">
+                                <StackPanel Orientation="Horizontal" Margin="15">
                                     <TextBlock Text="{Binding SubjectId}" Margin="10"/>
+                                    <TextBlock Text="{Binding SubjectName}" Margin="10"/>
                                     <TextBlock Text="{Binding Description}" Margin="10"/>
                                 </StackPanel>
                             </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                        </GridView.ItemTemplate>
+                    </GridView>
 
                 </StackPanel>
             </StackPanel>
 
-            <StackPanel>
+            <StackPanel Margin="5">
                 <TextBlock>Students</TextBlock>
-                <StackPanel>
-
-                    <ListBox ItemsSource="{Binding Path=Students}">
-
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
+                <StackPanel MaxWidth="800">
+                    <GridView Grid.Row="1" ItemsSource="{Binding Path=Students}" HorizontalAlignment="Center" Margin="20">
+                        <GridView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Student">
+                                <StackPanel Orientation="Horizontal" Margin="15">
+                                    <TextBlock Text="{Binding StudentId}" Margin="10"/>
                                     <TextBlock Text="{Binding Name}" Margin="10"/>
                                     <TextBlock Text="{Binding Surname}" Margin="10"/>
                                     <TextBlock Text="{Binding StudentNumber}" Margin="10"/>
                                 </StackPanel>
                             </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-
+                        </GridView.ItemTemplate>
+                    </GridView>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
