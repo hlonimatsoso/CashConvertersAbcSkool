@@ -10,9 +10,20 @@ namespace AbcSkool.UWP.Clients
 {
     public class SkoolClient : RestClient, ISkoolClient
     {
-        public Task<List<Student>> GetAllStudents()
+        public async Task<List<Student>> GetAllStudents()
         {
-            return Get<List<Student>>(Config.Api_AllStdents_Uri);
+            if (AppData.Students == null)
+                AppData.Students = await Get<List<Student>>(Config.Api_AllStdents_Uri);
+
+            return AppData.Students;
+        }
+
+        public async Task<List<Subject>> GetAllSubjects()
+        {
+            if(AppData.Subjects==null)
+                AppData.Subjects = await Get<List<Subject>>(Config.Api_AllSubjects_Url);
+
+            return AppData.Subjects;
         }
     }
 }

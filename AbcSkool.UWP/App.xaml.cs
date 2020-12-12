@@ -1,4 +1,5 @@
-﻿using AbcSkool.UWP.Clients;
+﻿using AbcSkool.Interfaces;
+using AbcSkool.UWP.Clients;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,7 +24,7 @@ namespace AbcSkool.UWP
     /// </summary>
     sealed partial class App : Application
     {
-        public SkoolClient SkoolClient { get; set; }
+        
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -32,6 +33,7 @@ namespace AbcSkool.UWP
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
         }
 
         /// <summary>
@@ -80,8 +82,8 @@ namespace AbcSkool.UWP
 
         private void Load()
         {
-            SkoolClient = new SkoolClient();
-            var students = SkoolClient.GetAllStudents().GetAwaiter().GetResult();
+            AppData.RefreshDataAsync().GetAwaiter().GetResult();
+
         }
 
         /// <summary>

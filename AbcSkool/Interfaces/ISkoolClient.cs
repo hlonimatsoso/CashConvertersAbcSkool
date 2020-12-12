@@ -9,5 +9,7 @@ namespace AbcSkool.Interfaces
     public interface ISkoolClient
     {
         Task<List<Student>> GetAllStudents();
+        Task<List<Subject>> GetAllSubjects();
+
     }
 }

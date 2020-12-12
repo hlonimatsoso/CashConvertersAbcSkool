@@ -7,8 +7,85 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <RelativePanel>
+            <Button x:Name="Hamburger" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" FontSize="30" Click="Hamburger_Click"></Button>
+        </RelativePanel>
+        <SplitView x:Name="HambergerSplit" IsPaneOpen="True"
+           DisplayMode="CompactOverlay"
+           OpenPaneLength="185"
+                   Grid.Row="1"
+                   >
+            <SplitView.Pane>
+                <ListBox>
+                    <ListBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <HyperlinkButton Click="HomeLink_Click" Foreground="DarkBlue">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xEA8A;" FontSize="30"/>
+                            </HyperlinkButton>
+
+                            <HyperlinkButton Name="HomeLink" Click="HomeLink_Click" Margin="20,0,0,0">Home</HyperlinkButton>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <StackPanel  Orientation="Horizontal">
+                            <HyperlinkButton Click="SubjectLink_Click" Foreground="DarkBlue">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8A1;" FontSize="30"/>
+                            </HyperlinkButton>
+
+                            <HyperlinkButton Name="SubjectLink" Click="SubjectLink_Click" Margin="20,0,0,0">Manage Subjects</HyperlinkButton>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <HyperlinkButton Click="StudentLink_Click" Foreground="DarkBlue">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8FA;" FontSize="30"/>
+                            </HyperlinkButton>
+                            <HyperlinkButton Name="StudentLink" Click="StudentLink_Click" Margin="20,0,0,0">Manage Students</HyperlinkButton>
+
+                        </StackPanel>
+                    </ListBoxItem>
+
+                </ListBox>
+
+            </SplitView.Pane>
+            <SplitView.Content>
+                <StackPanel>
+                    <Frame x:Name="MainFrame">
+
+                    </Frame>
+                    <TextBlock x:Name="ErrorBox">
+
+                    </TextBlock>
+                </StackPanel>
+
+                <!--<StackPanel>
+                    <TextBlock Text="Content"
+                   FontSize="24"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"/>
+
+                    <ListBox ItemsSource="{Binding Path=Students}">
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}" />
+                                    <TextBlock Text="{Binding Surname}"/>
+                                    <TextBlock Text="{Binding StudentNumber}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                </StackPanel>-->
+            </SplitView.Content>
+
+        </SplitView>
 
     </Grid>
 </Page>
