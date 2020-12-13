@@ -1,4 +1,5 @@
-﻿using AbcSkool.Models.DTO;
+﻿using AbcSkool.Models;
+using AbcSkool.Models.DTO;
 using AbcSkool.UWP.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -43,16 +44,34 @@ namespace AbcSkool.UWP.Views
 
         private async void AddSubject_Click(object sender, RoutedEventArgs e)
         {
-            AddSubjectDTO subject = new AddSubjectDTO
+            object @object;
+            if (this.VM.IsItemSelected)
             {
-                SubjectName = SubjectName.Text,
-                Description = Description.Text,
-            };
+                @object = new UpdateSubjectDTO
+                {
+                    SubjectName = SubjectName.Text,
+                    Description = Description.Text,
+                    SubjectId = this.VM.SubjectId
+                };
+            }
+            else
+            {
+                @object = new AddSubjectDTO
+                {
+                    SubjectName = SubjectName.Text,
+                    Description = Description.Text,
+                };
+            }
 
 
             try
             {
-                await AppData.Client.Post(Config.REST_Endpoints_Subjects, subject);
+                if (this.VM.IsItemSelected)
+                    await AppData.Client.PutAsync(Config.REST_Endpoints_Subjects, @object);
+                else
+                    await AppData.Client.Post(Config.REST_Endpoints_Subjects, @object);
+
+
                 await AppData.RefreshSubjectAsync();
                 this.VM.Subjects = AppData.Subjects;
                 this.VM.SubjectName = string.Empty;
@@ -61,15 +80,46 @@ namespace AbcSkool.UWP.Views
             }
             catch (Exception ex)
             {
-                string title = $"OH SNAP! Failed to add the following subject : {subject.SubjectName}";
+                string title = $"OH SNAP! Failed to add the following subject : {((Subject)@object).SubjectName}";
 
-                string msg = $"Couldn't add subject : {subject.ToString()}. \n Exception : {ex.Message}. \n Inner Exception : {ex.InnerException?.Message}.";
+                string msg = $"Couldn't add subject : {((Subject)@object).ToString()}. \n Exception : {ex.Message}. \n Inner Exception : {ex.InnerException?.Message}.";
                 var dialog = new MessageDialog(msg, title);
                 await dialog.ShowAsync();
                 // Log error
             }
         }
 
- 
+        private void SubjectsGrid_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Subject subject = e.ClickedItem as Subject;
+            this.VM.SubjectName = subject.SubjectName;
+            this.VM.Description = subject.Description;
+            this.VM.SubjectId = subject.SubjectId;
+            
+            this.VM.IsItemSelected = true;
+        }
+
+        private void ClearSelection_Click(object sender, RoutedEventArgs e)
+        {
+            SubjectsGrid.SelectedItem = null;
+            this.VM.IsItemSelected = false;
+            this.VM.SubjectName = string.Empty;
+            this.VM.Description = string.Empty;
+
+
+        }
+
+        private async void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            await AppData.Client.DeleteAsync(Config.REST_Endpoints_Subjects, VM.SubjectId);
+            await AppData.RefreshSubjectAsync();
+            this.VM.Subjects = AppData.Subjects;
+            this.VM.SubjectName = string.Empty;
+            this.VM.Description = string.Empty;
+            SubjectsGrid.SelectedItem = null;
+            this.VM.IsItemSelected = false;
+
+
+        }
     }
 }

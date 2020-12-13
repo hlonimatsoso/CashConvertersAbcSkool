@@ -36,28 +36,48 @@ namespace AbcSkool.UWP.Views
 
         private async void AddSTudent_Click(object sender, RoutedEventArgs e)
         {
-            AddStudentDTO student = new AddStudentDTO
+      
+
+            object @object;
+            if (this.VM.IsItemSelected)
             {
-                Name = Name.Text,
-                Surname = Surname.Text,
-                StudentNumber = Factory.RandomStudentNumberGenerator.Next(Config.StudentNumber_MinValue, Config.StudentNumber_MaxValue)
-            };
+                @object = new UpdateStudentDTO
+                {
+                    Name = Name.Text,
+                    Surname = Surname.Text,
+                    StudentId = this.VM.StudentId,
+                    StudentNumber = this.VM.StudentNumber
+                };
+            }
+            else
+            {
+                @object = new AddStudentDTO
+                {
+                    Name = Name.Text,
+                    Surname = Surname.Text,
+                    StudentNumber = Factory.RandomStudentNumberGenerator.Next(Config.StudentNumber_MinValue, Config.StudentNumber_MaxValue)
+                };
+            }
 
 
             try
             {
-                await AppData.Client.Post(Config.REST_Endpoints_Students, student);
+                if (this.VM.IsItemSelected)
+                    await AppData.Client.PutAsync(Config.REST_Endpoints_Students, @object);
+                else
+                    await AppData.Client.Post(Config.REST_Endpoints_Students, @object);
+
                 await AppData.RefreshStudentsAsync();
                 this.VM.Students = AppData.Students;
                 this.VM.Name = string.Empty;
                 this.VM.Surname = string.Empty;
-
+                this.VM.StudentNumber = 0;
             }
             catch (Exception ex)
             {
-                string title = $"OH SNAP! Failed to add the following student : {student.StudentNumber}";
+                string title = $"OH SNAP! Failed to add the following student : {((Student)@object).StudentNumber}";
 
-                string msg = $"Couldn't add student : {student.ToString()}. \n Exception : {ex.Message}. \n Inner Exception : {ex.InnerException?.Message}.";
+                string msg = $"Couldn't add student : {((Student)@object).ToString()}. \n Exception : {ex.Message}. \n Inner Exception : {ex.InnerException?.Message}.";
                 var dialog = new MessageDialog(msg, title);
                 await dialog.ShowAsync();
                 // Log error
@@ -74,6 +94,38 @@ namespace AbcSkool.UWP.Views
             base.OnNavigatedTo(e);
         }
 
- 
+        private void StudentsGrid_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Student subject = e.ClickedItem as Student;
+            this.VM.Name = subject.Name;
+            this.VM.Surname = subject.Surname;
+            this.VM.StudentId = subject.StudentId;
+            this.VM.StudentNumber = subject.StudentNumber;
+
+            this.VM.IsItemSelected = true;
+        }
+
+        private void ClearSelection_Click(object sender, RoutedEventArgs e)
+        {
+            StudentsGrid.SelectedItem = null;
+            this.VM.IsItemSelected = false;
+            this.VM.Name = string.Empty;
+            this.VM.Surname = string.Empty;
+            this.VM.StudentNumber = 0;
+
+        }
+
+        private async void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            await AppData.Client.DeleteAsync(Config.REST_Endpoints_Students, VM.StudentId);
+            await AppData.RefreshSubjectAsync();
+            this.VM.Students = AppData.Students;
+            this.VM.Name = string.Empty;
+            this.VM.Surname = string.Empty;
+            this.VM.StudentNumber = 0;
+
+            StudentsGrid.SelectedItem = null;
+            this.VM.IsItemSelected = false;
+        }
     }
 }

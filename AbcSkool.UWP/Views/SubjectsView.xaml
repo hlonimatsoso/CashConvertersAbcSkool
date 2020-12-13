@@ -17,7 +17,7 @@ xmlns:models="using:AbcSkool.Models"
 
         </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Center">Subjects</TextBlock>
-        <GridView Grid.Row="1" ItemsSource="{Binding Path=Subjects}" HorizontalAlignment="Center" Margin="20" >
+        <GridView x:Name="SubjectsGrid" IsItemClickEnabled="True" ItemClick="SubjectsGrid_ItemClick"  Grid.Row="1" ItemsSource="{Binding Path=Subjects}" HorizontalAlignment="Center" Margin="20" >
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="models:Subject">
                     <StackPanel Orientation="Horizontal" Margin="15">
@@ -33,7 +33,10 @@ xmlns:models="using:AbcSkool.Models"
             <TextBox x:Name="SubjectName" Text="{Binding Path=SubjectName, Mode=TwoWay}" Canvas.Left="91" Width="225"></TextBox>
             <TextBlock Text="Description" Canvas.Top="40" />
             <TextBox  x:Name="Description" Text="{Binding Path=Description, Mode=TwoWay}" Canvas.Left="91" Canvas.Top="40" Width="225"/>
-            <Button x:Name="AddSubject" IsEnabled="{Binding Path=CanSubmit}" Click="AddSubject_Click" Canvas.Top="94" Canvas.Left="91">Add Student</Button>
+            <Button x:Name="AddSubject" Margin="10" IsEnabled="{Binding Path=CanSubmit}" Click="AddSubject_Click" Canvas.Top="97" Canvas.Left="198" Content="{Binding Path=SubmitButtonText}" />
+            <Button x:Name="ClearSelection" Margin="10" IsEnabled="{Binding Path=IsItemSelected}" Click="ClearSelection_Click" Canvas.Top="97" Canvas.Left="78"  FontFamily="Segoe MDL2 Assets" Content="&#xE750;" Foreground="Orange"/>
+            <Button x:Name="Delete" Margin="10" IsEnabled="{Binding Path=IsItemSelected}" Click="Delete_Click" Canvas.Top="97" Canvas.Left="138"  FontFamily="Segoe MDL2 Assets" Content="&#xE711;" Foreground="Red"/>
+
         </Canvas>
 
     </Grid>

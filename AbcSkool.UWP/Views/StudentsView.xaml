@@ -17,7 +17,7 @@
 
         </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Center">STUDENTS</TextBlock>
-        <GridView Grid.Row="1" ItemsSource="{Binding Path=Students}" HorizontalAlignment="Center" Margin="20" >
+        <GridView x:Name="StudentsGrid" IsItemClickEnabled="True" ItemClick="StudentsGrid_ItemClick" Grid.Row="1" ItemsSource="{Binding Path=Students}" HorizontalAlignment="Center" Margin="20" >
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="models:Student">
                     <StackPanel Orientation="Horizontal" Margin="15">
@@ -34,7 +34,11 @@
             <TextBox x:Name="Name" Text="{Binding Path=Name, Mode=TwoWay}" Canvas.Left="91" Width="225"></TextBox>
             <TextBlock Text="Surname" Canvas.Top="40" />
             <TextBox  x:Name="Surname" Text="{Binding Path=Surname, Mode=TwoWay}" Canvas.Left="91" Canvas.Top="40" Width="225"/>
-            <Button x:Name="AddSTudent" IsEnabled="{Binding Path=CanSubmit}" Click="AddSTudent_Click" Canvas.Top="94" Canvas.Left="91">Add Student</Button>
+            <Button x:Name="AddSTudent" IsEnabled="{Binding Path=CanSubmit}" Click="AddSTudent_Click" Canvas.Top="117" Canvas.Left="193" Content="{Binding Path=SubmitButtonText}"/>
+            <Button x:Name="ClearSelection" Margin="10" IsEnabled="{Binding Path=IsItemSelected}" Click="ClearSelection_Click" Canvas.Top="108" Canvas.Left="78"  FontFamily="Segoe MDL2 Assets" Content="&#xE750;" Foreground="Orange"/>
+            <Button x:Name="Delete" Margin="10" IsEnabled="{Binding Path=IsItemSelected}" Click="Delete_Click" Canvas.Top="108" Canvas.Left="138"  FontFamily="Segoe MDL2 Assets" Content="&#xE711;" Foreground="Red"/>
+
+            <TextBlock Text="{Binding Path=StudentNumber}" Canvas.Top="83" Canvas.Left="91" />
         </Canvas>
 
     </Grid>

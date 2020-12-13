@@ -34,6 +34,14 @@ namespace AbcSkool.UWP.ViewModels
         }
 
 
+        private int _subjectId;
+        public int SubjectId
+        {
+            get { return _subjectId; }
+            set { _subjectId = value; }
+        }
+
+
 
         private string _subjectName;
         public string SubjectName
@@ -56,7 +64,7 @@ namespace AbcSkool.UWP.ViewModels
             }
         }
 
-       
+
 
         private string _description;
         public string Description
@@ -81,7 +89,6 @@ namespace AbcSkool.UWP.ViewModels
         }
 
 
-
         private bool _canSubmit;
         public bool CanSubmit
         {
@@ -93,14 +100,54 @@ namespace AbcSkool.UWP.ViewModels
             }
         }
 
+
+        private string _submitButtonText;
+        public string SubmitButtonText
+        {
+            get
+            {
+                if (IsItemSelected)
+                    SubmitButtonText = $"{Config.ButtonAction_Update} {SubjectName}";
+                else
+                    SubmitButtonText = $"{Config.ButtonAction_Add} Subject";
+
+                return _submitButtonText;
+            }
+            set
+            {
+                _submitButtonText = value;
+                PropertyHasChanged("SubmitButtonText");
+
+            }
+        }
+
+
         private void CheckCanSubmit()
         {
-            if (!IsSubjectNameEmpty && !IsDescriptionEmpty)
+            if (IsItemSelected)
+                this.CanSubmit = true;
+            else if (!IsSubjectNameEmpty && !IsDescriptionEmpty && !IsItemSelected)
                 this.CanSubmit = true;
             else
                 this.CanSubmit = false;
 
         }
+
+
+        private bool _isItemSelected;
+        public bool IsItemSelected
+        {
+            get { return _isItemSelected; }
+            set
+            {
+                _isItemSelected = value;
+
+                PropertyHasChanged("IsItemSelected");
+                PropertyHasChanged("SubmitButtonText");
+
+            }
+        }
+
 
     }
 }

@@ -11,5 +11,9 @@ namespace AbcSkool.Interfaces
 
         Task Post<T>(string url, T data);
 
+        Task PutAsync<T>(string url, T data);
+
+        Task DeleteAsync(string url,int id);
+
     }
 }

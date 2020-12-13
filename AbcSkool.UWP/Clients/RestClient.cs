@@ -19,6 +19,24 @@ namespace AbcSkool.UWP.Clients
             _client = new HttpClient() { BaseAddress = new Uri(Config.ApiBaseUrl) };
 
         }
+
+        public async Task DeleteAsync(string url, int id)
+        {
+            try
+            {
+                var responseTask = _client.DeleteAsync($"{url}/{id}");
+                responseTask.Wait();
+                var result = responseTask.Result;
+
+                //}
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         public async Task<T> Get<T>(string url)
         {
             T result = default(T);
@@ -43,7 +61,7 @@ namespace AbcSkool.UWP.Clients
                 var dialog = new MessageDialog(msg, title);
                 dialog.ShowAsync();
                 // Log error
-                
+
             }
 
             return result;
@@ -71,6 +89,29 @@ namespace AbcSkool.UWP.Clients
                 throw;
             }
 
+        }
+
+        public async Task PutAsync<T>(string url, T data)
+        {
+            T result = default(T);
+
+            try
+            {
+                //using (this._client)
+                //{
+                var responseTask = _client.PutAsJsonAsync(url, data);
+                responseTask.Wait();
+                var x = responseTask.Result;
+
+                if (x.IsSuccessStatusCode)
+                    result = await x.Content.ReadAsAsync<T>();
+                //}
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }
