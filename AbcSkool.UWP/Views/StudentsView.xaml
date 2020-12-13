@@ -29,7 +29,7 @@
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
-        <Canvas Grid.Row="2">
+        <Canvas Margin="20,10" Grid.Row="2">
             <TextBlock Text="Name" />
             <TextBox x:Name="Name" Text="{Binding Path=Name, Mode=TwoWay}" Canvas.Left="91" Width="225"></TextBox>
             <TextBlock Text="Surname" Canvas.Top="40" />

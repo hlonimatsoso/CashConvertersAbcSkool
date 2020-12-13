@@ -16,6 +16,13 @@ namespace AbcSkool.UWP.ViewModels
             this.Students = new List<Student>();
 
             AppData.SubjectsUpdated += AppData_SubjectsUpdated;
+            AppData.StudentsUpdated += AppData_StudentsUpdated
+                ;
+        }
+
+        private void AppData_StudentsUpdated(List<Student> obj)
+        {
+            this.Students = obj;
         }
 
         private void AppData_SubjectsUpdated(List<Subject> obj)

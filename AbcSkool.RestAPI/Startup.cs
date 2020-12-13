@@ -48,10 +48,16 @@ namespace AbcSkool.RestAPI
 
             services.AddScoped<ISubjectRepository, SubjectRepository>();
 
+            services.AddScoped<IStudentSubjectRepository, StudentSubjectRepository>();
+
+
 
             services.AddScoped<IStudentService, StudentService>();
 
             services.AddScoped<ISubjectService, SubjectService>();
+
+            services.AddScoped<IStudentSubjectService, StudentSubjectService>();
+
 
 
             //services.AddScoped<IAbcRepository, AbcRepository>();

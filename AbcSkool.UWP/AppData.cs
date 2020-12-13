@@ -30,7 +30,23 @@ namespace AbcSkool.UWP
             }
         }
 
-        public static List<Student> Students { get; set; }
+
+        private static List<Student> _students;
+
+
+        public static List<Student> Students
+        {
+            get
+            {
+                return _students;
+            }
+            set
+            {
+                _students = value;
+                if (StudentsUpdated != null)
+                    StudentsUpdated(Students);
+            }
+        }
 
 
         public static async Task RefreshSubjectAsync()
@@ -57,6 +73,11 @@ namespace AbcSkool.UWP
         }
 
         public static event Action<List<Subject>> SubjectsUpdated;
+
+        public static event Action<List<Student>> StudentsUpdated;
+
+        public static event Action<List<StudentSubjects>> StudentSubjectsUpdated;
+
 
     }
 }

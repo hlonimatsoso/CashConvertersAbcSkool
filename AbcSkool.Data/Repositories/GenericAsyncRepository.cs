@@ -10,7 +10,7 @@ namespace AbcSkool.Data.Repositories
 {
     public class GenericAsyncRepository<T> : IGenericRepository<T> where T : class
     {
-        private AbcSkoolDbContext _context = null;
+        protected AbcSkoolDbContext _context = null;
         private DbSet<T> table = null;
 
 

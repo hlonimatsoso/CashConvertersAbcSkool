@@ -28,7 +28,7 @@ xmlns:models="using:AbcSkool.Models"
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
-        <Canvas Grid.Row="2">
+        <Canvas Margin="20,10" Grid.Row="2">
             <TextBlock Text="Subject" />
             <TextBox x:Name="SubjectName" Text="{Binding Path=SubjectName, Mode=TwoWay}" Canvas.Left="91" Width="225"></TextBox>
             <TextBlock Text="Description" Canvas.Top="40" />
