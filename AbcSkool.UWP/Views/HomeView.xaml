@@ -9,24 +9,27 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid MaxWidth="800">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Center" Margin="0,0,0,20">Home</TextBlock>
         <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" >
-            <StackPanel Margin="5">
-                <TextBlock>Subjects</TextBlock>
+            <StackPanel Margin="2">
+                <TextBlock FontSize="20">Subjects</TextBlock>
                 <StackPanel>
-                    <GridView Grid.Row="1" ItemsSource="{Binding Path=Subjects}" HorizontalAlignment="Center" Margin="20" >
+                    <GridView Grid.Row="1" ItemsSource="{Binding Path=Subjects}" HorizontalAlignment="Left" >
                         <GridView.ItemTemplate>
                             <DataTemplate x:DataType="models:Subject">
-                                <StackPanel Orientation="Horizontal" Margin="15">
-                                    <TextBlock Text="{Binding SubjectId}" Margin="10"/>
-                                    <TextBlock Text="{Binding SubjectName}" Margin="10"/>
-                                    <TextBlock Text="{Binding Description}" Margin="10"/>
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="5">
+                                        <TextBlock Text="{Binding SubjectId}" Margin="5"/>
+                                        <TextBlock Text="{Binding SubjectName}" FontWeight="Bold" Margin="5"/>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding Description}" FontStyle="Italic" Margin="5"/>
                                 </StackPanel>
+                          
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>
@@ -34,18 +37,22 @@
                 </StackPanel>
             </StackPanel>
 
-            <StackPanel Margin="5">
-                <TextBlock>Students</TextBlock>
+            <StackPanel Margin="2">
+                <TextBlock FontSize="20">Students</TextBlock>
                 <StackPanel MaxWidth="800">
-                    <GridView Grid.Row="1" ItemsSource="{Binding Path=Students}" HorizontalAlignment="Center" Margin="20">
+                    <GridView Grid.Row="1" ItemsSource="{Binding Path=Students}" HorizontalAlignment="Left">
                         <GridView.ItemTemplate>
                             <DataTemplate x:DataType="models:Student">
-                                <StackPanel Orientation="Horizontal" Margin="15">
-                                    <TextBlock Text="{Binding StudentId}" Margin="10"/>
-                                    <TextBlock Text="{Binding Name}" Margin="10"/>
-                                    <TextBlock Text="{Binding Surname}" Margin="10"/>
-                                    <TextBlock Text="{Binding StudentNumber}" Margin="10"/>
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="5">
+                                        <TextBlock Text="{Binding StudentId}" Margin="5"/>
+                                        <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="5"/>
+                                        <TextBlock Text="{Binding Surname}" FontWeight="Medium" Margin="5"/>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding StudentNumber}" FontStyle="Italic" Margin="5"/>
+
                                 </StackPanel>
+                                
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>

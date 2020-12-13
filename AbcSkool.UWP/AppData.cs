@@ -12,7 +12,23 @@ namespace AbcSkool.UWP
     {
         public static SkoolClient Client = new SkoolClient();
 
-        public static List<Subject> Subjects { get; set; }
+
+        private static List<Subject> _subjects;
+
+        public static List<Subject> Subjects
+        {
+            get
+            {
+                return _subjects;
+            }
+            set
+            {
+                _subjects = value;
+
+                if (SubjectsUpdated != null)
+                    SubjectsUpdated(Subjects);
+            }
+        }
 
         public static List<Student> Students { get; set; }
 
@@ -40,6 +56,7 @@ namespace AbcSkool.UWP
             Students = await Client.GetAllStudents();
         }
 
-  
+        public static event Action<List<Subject>> SubjectsUpdated;
+
     }
 }
